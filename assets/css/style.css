@@ -1,0 +1,65 @@
+/* ELEMENTS */
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+}
+
+header {
+    display: flex;
+}
+
+header p {
+    width: 100%;
+    text-align: center;
+    margin: 15px;
+
+}
+
+/* CLASSES */
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: block;
+}
+
+.card {
+    margin: 0 auto;
+    padding-bottom: 5px;
+    width: 900px;
+    background-color: rgb(248, 241, 251);
+    border-radius: 50px;
+}
+
+.card h2 {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.card p {
+    margin: 0 25px;
+    line-height: 1.2;
+}
+
+/* IDs */
+#start-button {
+    margin: 0 auto;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#start-button p {
+    margin: 0 auto;
+    width: 90px;
+    padding: 5px;
+    border-radius: 15px;
+    border: black solid 1px;
+}
+
+/* Hover effect for start button */
+#start-button p:hover {
+    background-color: rgb(253, 248, 255);
+    cursor: grab;
+}
