@@ -66,8 +66,12 @@ answers.forEach(answer => {
             nextQuestion.classList.remove("hidden");
             nextQuestion.classList.add("shown");
         } else {
-            console.log("nope!");
+            console.log("wrong!");
             secondsLeft = secondsLeft - 5;
+            question.classList.remove("shown");
+            question.classList.add("hidden");
+            nextQuestion.classList.remove("hidden");
+            nextQuestion.classList.add("shown");
         }
 
         if (nextQuestion.className.includes("scoreboard")) {
