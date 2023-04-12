@@ -1,11 +1,15 @@
 var startButton = document.querySelector("#start-button");
 var timerDisplay = document.querySelector("#timer");
 var main = document.querySelector("main");
+var scoreboard = document.querySelector(".scoreboard");
 
 // On button click, start game (start timer and change to first question)
 
 var secondsLeft = 45;
 var pageCount = 0;
+
+var score = 0;
+var initials;
 
 startButton.addEventListener("click", function() {
     nextPage();
@@ -21,7 +25,7 @@ startButton.addEventListener("click", function() {
             secondsLeft = 0;
             timerDisplay.textContent = secondsLeft;
             // Game over :(
-            gameOver();
+            gameOverTime();
           }
     }, 1000);
 });
@@ -50,5 +54,37 @@ answers.forEach(answer => {
             secondsLeft = secondsLeft - 5;
         }
 
+        if (nextQuestion.className.includes("scoreboard")) {
+            gameOverWin();
+        }
     });
 });
+
+// game over function (for when timer runs out)
+function gameOverTime() {
+    var question = document.querySelector(".shown");
+
+    question.classList.remove("shown");
+    question.classList.add("hidden");
+    scoreboard.classList.remove("hidden");
+    scoreboard.classList.add("shown");
+
+    askInitials();
+    storeScore();
+}
+
+// game over function (for when user wins)
+function gameOverWin() {
+    score = secondsLeft;
+    secondsLeft = 0;
+}
+
+// asks the user for their initials
+function askInitials() {
+    initials = window.prompt("Your score was " + score + "\nPlease enter your initials:");
+}
+
+// store the score and user's initials in local storage
+function storeScore() {
+
+};
