@@ -2,6 +2,7 @@ var startButton = document.querySelector("#start-button");
 var timerDisplay = document.querySelector("#timer");
 var main = document.querySelector("main");
 var scoreboard = document.querySelector(".scoreboard");
+var scoreOl = document.querySelector("#score-list");
 
 // On button click, start game (start timer and change to first question)
 
@@ -10,6 +11,7 @@ var pageCount = 0;
 
 var score = 0;
 var initials;
+var allScores = JSON.parse(localStorage.getItem("scores")) || [];
 
 startButton.addEventListener("click", function() {
     nextPage();
@@ -71,6 +73,7 @@ function gameOverTime() {
 
     askInitials();
     storeScore();
+    renderScoreboard();
 }
 
 // game over function (for when user wins)
@@ -86,5 +89,22 @@ function askInitials() {
 
 // store the score and user's initials in local storage
 function storeScore() {
-
+    var currentScore = {
+        score: score,
+        initials: initials
+    };
+    allScores.push(currentScore);
+    localStorage.setItem("scores", JSON.stringify(allScores));
 };
+
+// build and render the scoreboard
+function renderScoreboard() {
+    allScores = JSON.parse(localStorage.getItem("scores"));
+    console.log(allScores);
+
+    for (var i = 0; i < allScores.length; i++) {
+        var scoreLi = document.createElement("li");
+        scoreLi.innerHTML = allScores[i].initials + " - " + allScores[i].score;
+        scoreOl.appendChild(scoreLi);
+    }
+}
