@@ -3,6 +3,9 @@ var timerDisplay = document.querySelector("#timer");
 var main = document.querySelector("main");
 var scoreboard = document.querySelector(".scoreboard");
 var scoreOl = document.querySelector("#score-list");
+var scoreboardLink = document.querySelector("#scoreboard-link");
+var restartButton = document.querySelector("#restart-button");
+var intro = document.querySelector("#intro");
 
 // On button click, start game (start timer and change to first question)
 
@@ -12,9 +15,11 @@ var pageCount = 0;
 var score = 0;
 var initials;
 var allScores = JSON.parse(localStorage.getItem("scores")) || [];
+var renderCount = 0;
 
 startButton.addEventListener("click", function() {
     nextPage();
+    scoreboardLink.classList.add("hidden");
 
     secondsLeft = 45;
     var timer = setInterval(function() {
@@ -102,9 +107,41 @@ function renderScoreboard() {
     allScores = JSON.parse(localStorage.getItem("scores"));
     console.log(allScores);
 
+    if (renderCount > 0) {
+        scoreOl.querySelectorAll("li").forEach(function(el) {
+            el.remove();
+        });
+        console.log(scoreboard);
+    }
+
     for (var i = 0; i < allScores.length; i++) {
         var scoreLi = document.createElement("li");
         scoreLi.innerHTML = allScores[i].initials + " - " + allScores[i].score;
         scoreOl.appendChild(scoreLi);
     }
+
+    renderCount++;
 }
+
+// add event listener to scoreboard link
+scoreboardLink.addEventListener("click", function () {
+    var question = document.querySelector(".shown");
+
+
+    question.classList.remove("shown");
+    question.classList.add("hidden");
+    scoreboard.classList.remove("hidden");
+    scoreboard.classList.add("shown");
+
+    scoreboardLink.classList.add("hidden");
+
+    renderScoreboard();
+});
+
+restartButton.addEventListener("click", function() {
+    scoreboard.classList.remove("shown");
+    scoreboard.classList.add("hidden");
+    intro.classList.remove("hidden");
+    intro.classList.add("shown");
+    scoreboardLink.classList.remove("hidden");
+});

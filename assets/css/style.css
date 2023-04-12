@@ -67,14 +67,14 @@ ol, li {
 }
 
 /* IDs */
-#start-button {
+#start-button, #restart-button {
     margin: 0 auto;
     padding: 10px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-#start-button p {
+#start-button p, #restart-button p {
     margin: 0 auto;
     width: 90px;
     padding: 5px;
@@ -83,7 +83,12 @@ ol, li {
 }
 
 /* Hover effect for start button */
-#start-button p:hover {
+#start-button p:hover, #restart-button p:hover {
     background-color: pink;
+    cursor: pointer;
+}
+
+#scoreboard-link:hover {
+    text-decoration: underline;
     cursor: pointer;
 }
