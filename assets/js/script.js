@@ -17,6 +17,8 @@ var initials;
 var allScores = JSON.parse(localStorage.getItem("scores")) || [];
 var renderCount = 0;
 
+var win = false;
+
 startButton.addEventListener("click", function() {
     nextPage();
     scoreboardLink.classList.add("hidden");
@@ -30,7 +32,13 @@ startButton.addEventListener("click", function() {
             // Stops execution of action at set interval
             clearInterval(timer);
             secondsLeft = 0;
-            score = 0;
+
+            if (win === false) {
+                score = 0;
+            } else {
+                win = false;
+            }
+
             timerDisplay.textContent = secondsLeft;
             // Game over :(
             gameOverTime();
@@ -77,6 +85,8 @@ function gameOverTime() {
     scoreboard.classList.remove("hidden");
     scoreboard.classList.add("shown");
 
+    // score = secondsLeft;
+
     askInitials();
     storeScore();
     renderScoreboard();
@@ -84,6 +94,7 @@ function gameOverTime() {
 
 // game over function (for when user wins)
 function gameOverWin() {
+    win = true;
     score = secondsLeft;
     secondsLeft = 0;
 }
