@@ -30,6 +30,7 @@ startButton.addEventListener("click", function() {
             // Stops execution of action at set interval
             clearInterval(timer);
             secondsLeft = 0;
+            score = 0;
             timerDisplay.textContent = secondsLeft;
             // Game over :(
             gameOverTime();
@@ -98,7 +99,14 @@ function storeScore() {
         score: score,
         initials: initials
     };
-    allScores.push(currentScore);
+    if (Array.isArray(allScores)) {
+        allScores.push(currentScore);
+    } else {
+        allScores = [""];
+        allScores.push(currentScore);
+        allScores.splice(0, 1);
+    }
+    
     localStorage.setItem("scores", JSON.stringify(allScores));
 };
 
